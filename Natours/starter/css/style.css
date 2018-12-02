@@ -115,6 +115,18 @@ body {
     }
 }
 
+@keyframes moveInButton {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* link is the pseudo class of an anchor element when it's a link */
 .btn:link,
 .btn:visited {
@@ -124,6 +136,7 @@ body {
     display: inline-block;
     border-radius: 100px;
     transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
 }
 
 .btn:hover {
@@ -140,4 +153,32 @@ body {
     background-color: #fff;
     color: #777;
 
+}
+
+.btn-animated {
+    animation: moveInButton 1s ease-out 0.75s;
+    /* sets the 0% properties to the element before the animation takes place */ 
+    animation-fill-mode: backwards;
+}
+
+.btn::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: transform 0.4s, opacity 0.4s;
+}
+
+.btn-white:after {
+    background-color: #fff;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
 }
